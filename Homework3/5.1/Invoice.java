@@ -21,11 +21,15 @@ public class Invoice
    */
    public void addItem(LineItem item)
    {
-		    items.add(item);
-			counter = counter+1;
-			counter.setCounter(counter);
+	   items.add(item);
+			if(item.toString().equals("Hammer")) {
+				
+				hammerCounter++;
+			}
+			else if(item.toString().contains("Bundle")) {
+				bundleCounter++;
+			}
 	   
-
       // Notify all observers of the change to the invoice
       ChangeEvent event = new ChangeEvent(this);
       for (ChangeListener listener : listeners)
@@ -74,20 +78,21 @@ public class Invoice
       String r = formatter.formatHeader();
       Iterator<LineItem> iter = getItems();
       while (iter.hasNext()) {
-    		  r +=formatter.formatLineItem(iter.next());
+    		  r +=formatter.formatLineItem(this,iter.next());
       }
          
       return r + formatter.formatFooter();
    }
 
-   public int getCounter() {
-	   return counter;
+   public int getHammerCounter() {
+	   return hammerCounter;
    }
-   public void setCounter(int count) {
-	   this.counter = count;
+   public int getBundleCounter() {
+	   return bundleCounter;
    }
 
    private ArrayList<LineItem> items;
    private ArrayList<ChangeListener> listeners;
-   private int counter;
+   public int hammerCounter;
+   public int bundleCounter;
 }
