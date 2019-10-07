@@ -1,4 +1,8 @@
 
+import java.awt.*;
 public interface UpdateSize {
-	void UpdateSize(int x, int y, int width);
+	void draw(Graphics2D g2);
+	void zoomIn();
+	void zoomOut();
+	
 }
